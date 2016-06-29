@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+$api = app('Dingo\Api\Routing\Router');
+
+    /*
+     * Rutas de API de Medicamentos
+     */
+
+    require('Routes/Api/Version1/MedicamentosApiRoutes.php');
