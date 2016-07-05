@@ -15,7 +15,7 @@ class MedicamentosTest extends TestCase
 
     public function testTodos()
     {
-        $this->get('api/medicamentos')
+        $this->get('api/medicamentos',$this->headersApi())
             ->seeJsonStructure([
                 'data' => [
                     '*' => [
@@ -38,7 +38,7 @@ class MedicamentosTest extends TestCase
      */
     public function testMedicamentosPorId()
     {
-        $this->get('api/medicamento/1')
+        $this->get('api/medicamento/1',$this->headersApi())
             ->seeJson([
                 'data' => [
                     'id' => 1,
@@ -54,7 +54,7 @@ class MedicamentosTest extends TestCase
 
     public function testBuscarPorNombre()
     {
-        $this->get('api/medicamentos/nombre/atame')
+        $this->get('api/medicamentos/nombre/atame',$this->headersApi())
             ->seeJsonStructure([
                 'data' => [
                     '*' => [
