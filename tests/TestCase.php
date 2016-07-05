@@ -22,4 +22,13 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
         return $app;
     }
+
+    protected function headersApi()
+    {
+        $headers = [
+            'Accept' => 'application/json',
+            'DonaVeApiAcceso' => env('ACCESO_TOKEN_DONAVE')];
+
+        return $headers;
+    }
 }
