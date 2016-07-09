@@ -29,6 +29,7 @@ class CreateApiAccesoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('api_acceso');
+
     }
 }

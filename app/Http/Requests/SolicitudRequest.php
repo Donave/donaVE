@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Dingo\Api\Http\FormRequest;
 
-class SolicitudRequest extends Request
+
+class SolicitudRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class SolicitudRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class SolicitudRequest extends Request
     public function rules()
     {
         return [
-            //
+            'correo_electronico'    => 'required|email',
+            'id_elemento'           => 'required|integer',
         ];
     }
 }

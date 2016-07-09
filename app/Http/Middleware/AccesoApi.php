@@ -18,7 +18,11 @@ class AccesoApi
     {
         $apiAcceso = new ApiAcceso();
         if($request->hasHeader('donaVeApiAcceso')){
-            if($apiAcceso->tokenValido($request->header('donaVeApiAcceso'))){
+            $apiAcceso = $apiAcceso->tokenValido($request->header('donaVeApiAcceso'));
+            if($apiAcceso){
+                $requestAll = $request->all();
+                $requestAll['id_api_acceso'] = $apiAcceso->id;
+                $request->replace($requestAll);
                 return $next($request);
             }
             abort(403, 'Unauthorized action.');

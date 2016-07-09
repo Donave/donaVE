@@ -14,9 +14,10 @@
 $factory->define(App\Solicitud::class, function (Faker\Generator $faker) {
     return [
         'correo_electronico' => 'info@donave.com',
-        'id_url' => $faker->url,
+        'id_url' => $faker->swiftBicNumber,
         'tipo' => 'medicamento',
         'id_elemento' => $faker->numberBetween(0,1200),
         'estado' => $faker->randomElement([true,false]),
+        'id_api_acceso' => 1
     ];
 });

@@ -19,3 +19,9 @@ $api = app('Dingo\Api\Routing\Router');
      */
 
     require('Routes/Api/Version1/MedicamentosApiRoutes.php');
+
+    /*
+    * Rutas de API de Solicitudes
+    */
+
+    require('Routes/Api/Version1/SolicitudesApiRoutes.php');

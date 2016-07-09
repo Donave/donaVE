@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SolicitudRequest;
 use App\Solicitud;
 use App\Transformers\SolicitudTransformer;
 use Dingo\Api\Routing\Helpers;
@@ -40,4 +41,29 @@ class SolicitudController extends Controller
 
         return $this->response->errorNotFound();
     }
+
+    public function postCrear(SolicitudRequest $request)
+    {
+        $solicitud =    $this->modelo->crearNuevo($request->all());
+        if($solicitud){
+            $solicitud->setSolicitudEstado();
+            $solicitud->setSolicitudTipoMedicamento();
+            $solicitud->setSolicitudUrl();
+            return $this->response->item($solicitud, new SolicitudTransformer());
+        }
+
+        return $this->response->errorBadRequest();
+    }
+
+    public function getSolicitudPorIdUrl($url)
+    {
+        $solicitud = $this->modelo->obtenerPorUrl($url);
+
+        if($solicitud){
+            return  $this->response->item($solicitud, new SolicitudTransformer());
+        }
+
+        return  $this->response->errorNotFound();
+    }
+
 }

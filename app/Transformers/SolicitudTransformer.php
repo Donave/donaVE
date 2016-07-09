@@ -21,14 +21,13 @@ class SolicitudTransformer extends TransformerAbstract
     public function transform(Solicitud $solicitud)
     {
         $medicamento    = new Medicamento();
-        $medicamentoT   = new MedicamentoTransformer();
-        $dataElemento   =  $medicamentoT->transform($medicamento->buscarPorId($solicitud->id_elemento));
+        $medicamentoTranformer   = new MedicamentoTransformer();
+        $dataElemento   =  $medicamentoTranformer->transform($medicamento->buscarPorId($solicitud->id_elemento));
         return [
-            'correoElectronico' => $solicitud->correo_electronico,
+            //'correoElectronico' => $solicitud->correo_electronico,
             'url' => $solicitud->id_url,
             'tipo' => $solicitud->tipo,
-            'elemento' => $solicitud->elemento,
-            'estado' => $solicitud->estado,
+            'estado' => (bool)$solicitud->estado,
             'dataElemento' => $dataElemento
         ];
     }
