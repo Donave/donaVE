@@ -31,6 +31,6 @@ class Medicamento extends Model
 
     public function buscarPorNombre($nombre)
     {
-        return $this->where('nombre', 'LIKE', '%' . $nombre . '%')->take(10)->get();
+        return $this->where('nombre', 'LIKE', '%' . $nombre . '%')->take(100)->get();
     }
 }

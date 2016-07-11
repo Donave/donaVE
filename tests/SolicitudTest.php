@@ -85,7 +85,7 @@ class SolicitudTest extends TestCase
     /**
      * @test
      *
-     * Test: POST /solicitud/{url}
+     * Test: GET /solicitud/{url}
      */
     public function testObtenerSolicitud()
     {
@@ -109,6 +109,35 @@ class SolicitudTest extends TestCase
                     ]
             ])
             ->seeStatusCode(200);
+    }
+
+    /**
+     * @test
+     *
+     * Test: GET /solicitudes/atamel/1
+     */
+    public function testObtenerSolicitudesPorNombreElemento()
+    {
+        $this->get('api/solicitudes/atamel/1',$this->headersApi())
+            ->seeJsonStructure([
+                'data' => [
+                    '*' => [
+                        //'correoElectronico',
+                        'url',
+                        'tipo',
+                        'estado',
+                        'dataElemento' => [
+                            'id',
+                            'nombre',
+                            'laboratorio',
+                            'concentracion',
+                            'formaFarmacetica',
+                            'titular',
+                            'nombreGenerico',
+                        ],
+                    ],
+                ]
+            ]);
     }
 
 }

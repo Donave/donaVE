@@ -59,4 +59,22 @@ class Solicitud extends Model
         return $this->belongsTo('App/ApiAcceso','id_api_acceso');
     }
 
+    public function obternerpPorElemento($arrayElmento,$page)
+    {
+        Paginator::currentPageResolver(function () use ($page) {
+            return $page;
+        });
+
+        $solictud = $this->where('estado', true);
+        foreach($arrayElmento as $i => $elemento){
+            if($i == 0){
+                $solictud = $solictud->where('id_elemento',$elemento->id);
+            }else{
+                $solictud = $solictud->orWhere('id_elemento',$elemento->id);
+            }
+        }
+
+        return $solictud->paginate(25);
+    }
+
 }

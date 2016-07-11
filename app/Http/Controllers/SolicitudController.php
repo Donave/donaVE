@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SolicitudRequest;
+use App\Medicamento;
 use App\Solicitud;
 use App\Transformers\SolicitudTransformer;
 use Dingo\Api\Routing\Helpers;
@@ -64,6 +65,20 @@ class SolicitudController extends Controller
         }
 
         return  $this->response->errorNotFound();
+    }
+
+    public function getSolicitudPorElemento($elemento,$pag)
+    {
+        $elementoObj = New Medicamento();
+        $elementoObj = $elementoObj->buscarPorNombre($elemento);
+        if($elementoObj){
+            $solicitud = $this->modelo->obternerpPorElemento($elementoObj,$pag);
+            if($solicitud){
+                return $this->response->paginator($solicitud, new SolicitudTransformer());
+            }
+        }
+        return $this->response->errorNotFound();
+
     }
 
 }
